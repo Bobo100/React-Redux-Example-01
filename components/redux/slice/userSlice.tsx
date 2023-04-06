@@ -1,3 +1,4 @@
+// component/redux/slice/userSlice.tsx
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { userInitialState } from "../state/stateType"
 import { RootState } from "../store/store"
