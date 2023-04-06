@@ -8,9 +8,11 @@ import { fetchFirstData } from "../components/redux/slice/asyncSlice";
 
 function HomePage() {
 
+    const dispatch = useAppDispatch()
+
+    // 第一個slice
     // The `state` arg is correctly typed as `RootState` already
     const count = useAppSelector((state) => state.counterReducer.value)
-    const dispatch = useAppDispatch()
 
     const [incrementAmount, setIncrementAmount] = useState('2');
     const incrementValue = Number(incrementAmount) || 0;
