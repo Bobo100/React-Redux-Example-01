@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Layout from '../components/layout';
 import { useAppDispatch, useAppSelector } from "../components/redux/hook/hook";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { decrement, increment, incrementByAmount } from "../components/redux/slice/counterSlice";
 import { setUserAge, setUsername, setUserEmail } from "../components/redux/slice/userSlice";
+import { fetchFirstData } from "../components/redux/slice/asyncSlice";
 
 function HomePage() {
 
@@ -21,6 +22,15 @@ function HomePage() {
     const [email, setEmail] = useState('');
 
     const ageValue = Number(age) || 0;
+
+    // 第三個slice
+    const asyncData = useAppSelector((state) => state.async)
+
+    useEffect(() => {
+        dispatch(fetchFirstData());
+    }, [])
+
+    console.log(asyncData)
 
     return (
         <Layout>
@@ -99,7 +109,16 @@ function HomePage() {
                     </button>
                 </div>
 
-                <a href="https://react-redux-neon.vercel.app/useReduxOfficial" rel="noopener" target="_blank" className="border p-2 rounded border-title hover:bg-title hover:text-black">回去學習~</a>
+                <h2 className="text-2xl mt-3">範例三 (非同步資料)</h2>
+                <div className="border border-title p-5 m-3">
+                    <div>asyncData userId: {asyncData.userId}</div>
+                    <div>asyncData id: {asyncData.id}</div>
+                    <div>asyncData title: {asyncData.title}</div>
+                    <div>asyncData completed: {`${asyncData.completed}`}</div>
+                    <div>asyncData isLoading: {`${asyncData.isLoading}`}</div>
+                </div>
+
+                <a href="https://react-redux-neon.vercel.app/useReduxOfficial" rel="noopener" target="_blank" className="border p-2 rounded border-title hover:bg-title hover:text-black mt-5">回去學習~</a>
             </div>
         </Layout>
     )
