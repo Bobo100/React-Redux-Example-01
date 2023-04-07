@@ -3,8 +3,10 @@ import Layout from '../components/layout';
 import { useAppDispatch, useAppSelector } from "../components/redux/hook/hook";
 import { useEffect, useState } from "react";
 import { decrement, increment, incrementByAmount } from "../components/redux/slice/counterSlice";
-import { setUserAge, setUsername, setUserEmail } from "../components/redux/slice/userSlice";
-import { fetchFirstData } from "../components/redux/slice/asyncSlice";
+import { setUserAge, setUsername, setUserEmail, selectUserData } from "../components/redux/slice/userSlice";
+import { fetchFirstData, selectAsync } from "../components/redux/slice/asyncSlice";
+import { selectCount } from "../components/redux/slice/counterSlice";
+import { selectUsername } from "../components/redux/slice/userSlice";
 
 function HomePage() {
 
@@ -12,13 +14,13 @@ function HomePage() {
 
     // 第一個slice
     // The `state` arg is correctly typed as `RootState` already
-    const count = useAppSelector((state) => state.counterReducer.value)
-
+    // const count = useAppSelector((state) => state.counterReducer.value)
+    const count = useAppSelector(selectCount)
     const [incrementAmount, setIncrementAmount] = useState('2');
     const incrementValue = Number(incrementAmount) || 0;
 
-    // 第二個slice 
-    const user = useAppSelector((state) => state.user)
+    // 第二個slice
+    const user = useAppSelector(selectUserData)
     const [name, setName] = useState('');
     const [age, setAge] = useState('0');
     const [email, setEmail] = useState('');
@@ -26,8 +28,7 @@ function HomePage() {
     const ageValue = Number(age) || 0;
 
     // 第三個slice
-    const asyncData = useAppSelector((state) => state.async)
-
+    const asyncData = useAppSelector(selectAsync)
     useEffect(() => {
         dispatch(fetchFirstData());
     }, [])

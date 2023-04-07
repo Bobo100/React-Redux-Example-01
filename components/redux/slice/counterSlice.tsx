@@ -6,7 +6,7 @@ import { RootState } from "../store/store"
 export const counterSlice = createSlice({
     name: 'counter',
     // `createSlice` will infer the state type from the `initialState` argument
-    initialState,
+    initialState: initialState,
     reducers: {
         increment: (state) => {
             state.value += 1

@@ -41,6 +41,6 @@ export const asyncSlice = createSlice({
 })
 export const { setDataTitle } = asyncSlice.actions
 
-export const selectDataTitle = (state: RootState) => state.async.title
+export const selectAsync = (state: RootState) => state.async
 
 export default asyncSlice.reducer

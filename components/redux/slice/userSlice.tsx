@@ -25,4 +25,11 @@ export const selectUsername = (state: RootState) => state.user.username
 export const selectAge = (state: RootState) => state.user.age
 export const selectEmail = (state: RootState) => state.user.email
 
+// 把selectors合併成一個 新的selector
+export const selectUserData = (state: RootState) => ({
+    username: selectUsername(state ),
+    age: selectAge(state),
+    email: selectEmail(state),
+});
+
 export default userSlice.reducer
